@@ -30,6 +30,80 @@ In order to run this program, you need a few sets of tools installed and in your
   You may disable the wrapper at any time by setting `rlwrap := ''` inside the script.
   (don't comment that line though, it won't work).
 
+Given the above requiremented are met, you are ready to execute `./tsam`. You may place the script
+anywhere in your filesystem, preferrably in a location referenced by your `PATH`.
+
+## Introduction
+
+> Note: the following assumes you are running `./tsam` from inside a _tmux_ session.
+
+> *: If rlwrap is enabled, you may see a '> ' prompt show up.
+
+When you first execute the script, you will be presented with the following output:
+
+```
+-. /tmp/tsam-vts/0_sh
+```
+
+this means the program successfully executed [_sam(1)_](https://9fans.github.io/plan9port/man/man1/sam.html), and you are ready to run commands on your panes.
+
+To verify all your panes loaded correctly, type: '_n_ ⏎'. You should see the something like:
+
+```
+-. /tmp/tsam-vts/0_sh
+-  /tmp/tsam-vts/1_tail
+-  /tmp/tsam-vts/2_cat
+-  /tmp/tsam-vts/3_vi
+...
+```
+
+where filenames match the format 'ID_COMMAND'. Keep in mind they are merely a **snapshot**
+of the state of the panes as you executed the program.
+> This means you can't analyze **live** data just yet, but it's a planned feature.
+
+Although they are snapshots, they are not read-only. You may modify "pane-files" as you wish,
+saving one of them will send positive changes as keys to the corresponding pane.
+Here is a simple example:
+
+```
+~ $ tsam
+n ⏎
+-. /tmp/tsam-vts/0_sh
+-  /tmp/tsam-vts/1_vi
+$ a/tsam!/ ⏎
+w ⏎
+/tmp/tsam-vts/0_sh: ?warning: last char not newline
+#38
+^D
+tsam!~ $ tsam!
+```
+
+> Note: the last line looks weird, this is because the keys were sent right after the program
+was finished. Before my shell could take back control, the keys were already "typed" into the pty.
+As soon as the shell came back, it correctly received the keys and displayed them after the prompt.
+
+This example demonstrates a _tsam_ session. Consisting of the following commands:
+
+- `n`: Previously mentioned, displays open "pane-files" (and any manually opened files);
+- `$ a/tsam!/`: this is also a full command, consisting of an _address_ and an _instruction_;
+- `w`: This is an instruction for the editor to save the current active file;
+- ^D: This is just Ctrl + d, a common way to exit many command line programs, sends 'EOF'.
+
+The only mystery left is the elusive `$ a/tsam!/` command, let's disect it:
+
+- `$`: this is an _address_, in this case it means simply the EOF (end-of-file),
+  which means the next command will operate right at the end of the file;
+- `a`: this is an _instruction_, it means "append". It simply appends its _argument_ right after
+  whatever address we are operating in;
+- `/tsam!/`: this is what we called the _argument_ in the last item. Everything inside `/` is
+  passed as input to the specified _instruction_, a literal '/' may be written as: '\/'.
+
+This manual is a work-in-progress. For now, you may read these resources:
+
+- A proper intro: [sam-language](https://ratfactor.com/papers/sam-language)
+- The original _sam_ paper: [**The Text Editor**](https://doc.cat-v.org/plan_9/4th_edition/papers/sam/)
+- Useful links: [sam.cat-v.org](http://sam.cat-v.org/)
+
 ## Features
 
 - Searching for text in a specific pane:
@@ -81,5 +155,6 @@ by now, but here are some ideas:
 - [ ] Implement a `POSIX` shell script. This is the easiest, the script is `just` a wrapper :-).
 - [ ] Redesign send-keys functionality. I'll be thinking on this one, but it's good enough for now.
 - [ ] Killing panes. This could be based on deletion, i need a way to index which files were kept open.
+- [ ] Processing live data. This could involve usage of pipe-pane, it's in my list for an update.
 
 feel free to send me feature requests.
