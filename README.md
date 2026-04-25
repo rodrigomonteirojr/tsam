@@ -156,5 +156,7 @@ by now, but here are some ideas:
 - [ ] Redesign send-keys functionality. I'll be thinking on this one, but it's good enough for now.
 - [ ] Killing panes. This could be based on deletion, i need a way to index which files were kept open.
 - [ ] Processing live data. This could involve usage of pipe-pane, it's in my list for an update.
+- [ ] Manually specify a session to operate on.
+- [ ] Scripting support (e.g. a (-c)/(-e) flag)
 
 feel free to send me feature requests.
