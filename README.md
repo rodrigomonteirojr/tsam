@@ -96,7 +96,7 @@ The only mystery left is the elusive `$ a/tsam!/` command, let's disect it:
 - `a`: this is an _instruction_, it means "append". It simply appends its _argument_ right after
   whatever address we are operating in;
 - `/tsam!/`: this is what we called the _argument_ in the last item. Everything inside `/` is
-  passed as input to the specified _instruction_, a literal '/' may be written as: '\/'.
+  passed as input to the specified _instruction_, a literal '/' may be written as: '\\/'.
 
 This manual is a work-in-progress. For now, you may read these resources:
 
