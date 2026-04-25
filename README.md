@@ -6,28 +6,27 @@ tsam is a program that interacts with tmux panes using the SAM editor
 
 ## Getting started
 
-To run this program, you need a few set of tools installed and in you `PATH`.
+In order to run this program, you need a few sets of tools installed and in your `PATH`.
 
-- (**Required**) [_tmux(1)_](https://github.com/tmux/tmux) of course.
+- (**Required**) a running [_tmux_](https://github.com/tmux/tmux) session.
 
 - (**Required**) a [_sam(1)_](https://9fans.github.io/plan9port/man/man1/sam.html) compatible
   text editor, specifically, it could theoretically be _any_ editor, maybe even X editors, the only
-  required assumptions is that it has a `-d` flag, to be ran in headless mode
+  required assumptions is that it has a `-d` flag, to be run in headless mode
   (a la [_ed(1)_](https://9fans.github.io/plan9port/man/man1/ed.html)), and that it accepts multiple
   files as arguments (through xargs). Preferrably it should not run formatters or other similar
   entire file modifications, since it could cause some issues with the sent-keys detection.
-  Anyways, if you want a _sam_, you can grab it from [deadpixi's sam](https://github.com/deadpixi/sam),
+  Anyways, if you want a copy of _sam_, you can grab it from [deadpixi's sam](https://github.com/deadpixi/sam),
   which is what this is tested against and also my favorite pick.
 
 - (**Required**) [_Just_](https://github.com/casey/just). I will write this as a `POSIX` shell script
-  sometime, but for now it was way easier to prototype it in `just`.
+  sometime, but for now it was way easier to prototype it in _just_.
 
 - (_Optional_) [rlwrap](https://github.com/hanslub42/rlwrap). If you are going to use _sam_, this is
-  a no-brainer for you, i've already setup the command and wrapping in the `tsam` script,
-  so if you already have it installed, there are few reasons not to use it, since without it you can't
-  even navigate through the command. But you may turn it off simply by setting the `rlwrap := '...'`
-  line in the script to something like `rlwrap := ''`, and it's off! (don't comment the line though,
-  it won't work).
+  a no-brainer for you. I've already setup the command and wrapping in the `tsam` script, without it,
+  you won't be able to navigate through the command line, though you can still write commands.
+  You may turn it off at any time by setting the `rlwrap := '...'` line in the script to something
+  like: `rlwrap := ''`, and it's off! (don't comment the line though, it won't work).
 
 ## Features
 
