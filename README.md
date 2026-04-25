@@ -75,8 +75,8 @@ always a blank line, you can treat is a `command buffer`.
 There are a few major design things to think about, and I couldn't even gather my thoughts on it
 by now, but here are some ideas:
 
-[ ] Implement a `POSIX` shell script. This is the easiest, the script is `just` a wrapper :-).
-[ ] Redesign send-keys functionality. I'll be thinking on this one, but it's good enough for now.
-[ ] Killing panes. This could be based on deletion, i need a way to index which files were kept open.
+- [ ] Implement a `POSIX` shell script. This is the easiest, the script is `just` a wrapper :-).
+- [ ] Redesign send-keys functionality. I'll be thinking on this one, but it's good enough for now.
+- [ ] Killing panes. This could be based on deletion, i need a way to index which files were kept open.
 
 feel free to send me feature requests.
