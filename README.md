@@ -8,6 +8,8 @@ tsam is a program that interacts with tmux panes using the SAM editor
 
 To run this program, you need a few set of tools installed and in you `PATH`.
 
+- (**Required**) [_tmux(1)_](https://github.com/tmux/tmux) of course.
+
 - (**Required**) a [_sam(1)_](https://9fans.github.io/plan9port/man/man1/sam.html) compatible
   text editor, specifically, it could theoretically be _any_ editor, maybe even X editors, the only
   required assumptions is that it has a `-d` flag, to be ran in headless mode
