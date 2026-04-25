@@ -4,6 +4,9 @@ tsam is a program that interacts with tmux panes using the SAM editor
 
 <img width="1418" height="836" alt="2026-04-25-133451_1418x836_scrot" src="https://github.com/user-attachments/assets/74fb2930-f6a2-4788-8bcb-e6e32b125f2c" />
 
+<br>
+<br>
+
 ## Getting started
 
 In order to run this program, you need a few sets of tools installed and in your `PATH`.
@@ -32,6 +35,9 @@ In order to run this program, you need a few sets of tools installed and in your
 
 Given the above requiremented are met, you are ready to execute `./tsam`. You may place the script
 anywhere in your filesystem, preferrably in a location referenced by your `PATH`.
+
+<br>
+<br>
 
 ## Introduction
 
@@ -104,6 +110,9 @@ This manual is a work-in-progress. For now, you may read these resources:
 - The original _sam_ paper: [**The Text Editor**](https://doc.cat-v.org/plan_9/4th_edition/papers/sam/)
 - Useful links: [sam.cat-v.org](http://sam.cat-v.org/)
 
+<br>
+<br>
+
 ## Features
 
 - Searching for text in a specific pane:
@@ -146,6 +155,9 @@ handy, and for this purpose I also included a safeguard in the source code to gu
 always a blank line, you can treat is a `command buffer`.
 
 - ...And many more. `y`, `g`, `v`, `Y` and others work as expected.
+
+<br>
+<br>
 
 ## TODO
 
