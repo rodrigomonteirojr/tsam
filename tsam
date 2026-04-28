@@ -34,6 +34,7 @@ diff:
 
 
 [doc('boot Sam with our virtual panes and unbind ^C, exit with ^D')]
+[no-cd]
 eval:
 	stty intr undef
 	find '{{ vt-dir }}' -type f -exec {{ rlwrap }} sam -d {} \+
@@ -55,3 +56,4 @@ dump-panes:
 EOF
 
 just --justfile /tmp/TSAM
+
