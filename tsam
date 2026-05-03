@@ -9,14 +9,8 @@ rlwrap := "rlwrap -a -p'1;34' -S '> '"
 
 vt-dir := '/tmp/tsam-vts'
 ro-dir := '/tmp/tsam-vts-ro'
-pn_fmt := '#{pane_id} #{pane_current_command}'
-pn_dmp := (
-	'tmux capture-pane -p -t "%$1" |' +
-		'{ cat; echo; }        |' +
-		f'tee "{{ join(vt-dir, '$2') }}"' +
-		   f' "{{ join(ro-dir, '$2') }}"' +
-		' >/dev/null 2>&1'
-)
+
+pane-format := '#{pane_id} #{pane_id}_#{pane_current_command}'
 
 
 default: setup dump-panes eval diff
@@ -24,13 +18,10 @@ default: setup dump-panes eval diff
 
 diff:
 	find '{{ vt-dir }}' -type f -exec \
-		sh -c 'FILE="$(basename "{}")"; \
-			diff "{{ ro-dir }}/$FILE" "{}" | \
-			grep -e "^+[^+]" | \
-			sed "s/^+//g"    | \
-			xargs tmux send-keys -t \
-				"$(printf "%%%s" "$FILE" | cut -d"_" -f1)"' \
-		\;
+		sh -c 'filename="$(basename "{}")"; \
+			diff "{{ ro-dir }}/$filename" "{}" | \
+			grep -e "^+[^+]" | sed "s/^+//g"   | \
+			xargs tmux send-keys -t "${filename%%_*}"' \;
 
 
 [doc('boot Sam with our virtual panes and unbind ^C, exit with ^D')]
@@ -42,18 +33,19 @@ eval:
 
 
 setup:
-	find '{{ vt-dir }}' -type f -delete
-	find '{{ ro-dir }}' -type f -delete
 	mkdir -p '{{ vt-dir }}'
 	mkdir -p '{{ ro-dir }}'
+	find '{{ vt-dir }}' -type f -delete
+	find '{{ ro-dir }}' -type f -delete
 
 
 dump-panes:
-	tmux list-panes -a -F '#{pane_id} #{pane_current_command}' | \
-		tr -cd '[:alnum:]_ \n' | awk '{print $1 " " $1 "_" $2}' | \
+	tmux list-panes -a -F '{{ pane-format }}' | \
 		xargs -n2 -- \
-			sh -c '{{ pn_dmp }}' _
+			sh -c 'tmux capture-pane -p -t "$1" | \
+				tee "{{ join(vt-dir, '$2') }}" \
+				    "{{ join(ro-dir, '$2') }}"' sh \
+				>/dev/null 2>&1
 EOF
 
 just --justfile /tmp/TSAM
-
