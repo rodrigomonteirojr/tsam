@@ -76,7 +76,7 @@ Here is a simple example:
 n ⏎
 -. /tmp/tsam-vts/0_sh
 -  /tmp/tsam-vts/1_vi
-$ a/tsam!/ ⏎
+$ i/tsam!/ ⏎
 w ⏎
 /tmp/tsam-vts/0_sh: ?warning: last char not newline
 #38
@@ -91,7 +91,7 @@ As soon as the shell came back, it correctly received the keys and displayed the
 This example demonstrates a _tsam_ session. Consisting of the following commands:
 
 - `n`: Previously mentioned, displays open "pane-files" (and any manually opened files);
-- `$ a/tsam!/`: this is also a full command, consisting of an _address_ and an _instruction_;
+- `$ i/tsam!/`: this is also a full command, consisting of an _address_ and an _instruction_;
 - `w`: This is an instruction for the editor to save the current active file;
 - ^D: This is just Ctrl + d, a common way to exit many command line programs, sends 'EOF'.
 
@@ -99,7 +99,7 @@ The only mystery left is the elusive `$ a/tsam!/` command, let's disect it:
 
 - `$`: this is an _address_, in this case it means simply the EOF (end-of-file),
   which means the next command will operate right at the end of the file;
-- `a`: this is an _instruction_, it means "append". It simply appends its _argument_ right after
+- `i`: this is an _instruction_, it means "insert". It simply inserts its _argument_ before
   whatever address we are operating in;
 - `/tsam!/`: this is what we called the _argument_ in the last item. Everything inside `/` is
   passed as input to the specified _instruction_, a literal `'/'` may be written as: `'\/'`.
@@ -144,7 +144,7 @@ line is to avoid mixing with the other text in the terminal
 All of this also means that you must save the files. Feel free to suggest alternatives!
 
 ```
-> X/1/ $- a/C-l "ls" Enter/
+> X/1/ $- i/C-l "ls" Enter/
 > X/1/ w
 /tmp/tsam-vts/1_sh: #592
 > ^D
