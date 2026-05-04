@@ -48,7 +48,7 @@ anywhere in your filesystem, preferrably in a location referenced by your `PATH`
 When you first execute the script, you will be presented with the following output:
 
 ```
--. /tmp/tsam-vts/0_sh
+-. /tmp/tsam-vts/%0_sh
 ```
 
 this means the program successfully executed [_sam(1)_](https://9fans.github.io/plan9port/man/man1/sam.html), and you are ready to run commands on your panes.
@@ -56,10 +56,10 @@ this means the program successfully executed [_sam(1)_](https://9fans.github.io/
 To verify all your panes loaded correctly, type: '_n_ ⏎'. You should see the something like:
 
 ```
--. /tmp/tsam-vts/0_sh
--  /tmp/tsam-vts/1_tail
--  /tmp/tsam-vts/2_cat
--  /tmp/tsam-vts/3_vi
+-. /tmp/tsam-vts/%0_sh
+-  /tmp/tsam-vts/%1_tail
+-  /tmp/tsam-vts/%2_cat
+-  /tmp/tsam-vts/%3_vi
 ...
 ```
 
@@ -74,11 +74,11 @@ Here is a simple example:
 ```
 ~ $ tsam
 n ⏎
--. /tmp/tsam-vts/0_sh
--  /tmp/tsam-vts/1_vi
+-. /tmp/tsam-vts/%0_sh
+-  /tmp/tsam-vts/%1_vi
 $ i/tsam!/ ⏎
 w ⏎
-/tmp/tsam-vts/0_sh: ?warning: last char not newline
+/tmp/tsam-vts/%0_sh: ?warning: last char not newline
 #38
 ^D
 tsam!~ $ tsam!
@@ -146,7 +146,7 @@ All of this also means that you must save the files. Feel free to suggest altern
 ```
 > X/1/ $- i/C-l "ls" Enter/
 > X/1/ w
-/tmp/tsam-vts/1_sh: #592
+/tmp/tsam-vts/%1_sh: #592
 > ^D
 ```
 
